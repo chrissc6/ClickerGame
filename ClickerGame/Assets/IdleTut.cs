@@ -7,6 +7,7 @@ public class IdleTut : MonoBehaviour
 {
     public Text cashText;
     public double cash;
+    public Text cashClickValueText;
     public double cashClickValue;
 
     public Text cashPerSecText;
@@ -34,6 +35,8 @@ public class IdleTut : MonoBehaviour
         //cashPerSec = biz1UpgradeLevel;
 
         cashText.text = "Cash: $" + cash.ToString("F0");
+
+        cashClickValueText.text = "Cash Per Click: $" + cashClickValue.ToString("F0");
         cashPerSecText.text = "Cash Per Sec: $" + cashPerSec.ToString("F0");
         workUpgradeText.text = "Upgrade: $" + workUpgradeCost.ToString("F0") + " \nROI: +$" + workUpgradeLevel + "per click";
         biz1Text.text = "Lemonade Stand $" + biz1Cost.ToString("F0") + " \nROI: +$" + biz1UpgradeLevel + " cash /sec";
