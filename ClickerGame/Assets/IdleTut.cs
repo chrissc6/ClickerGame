@@ -63,7 +63,7 @@ public class IdleTut : MonoBehaviour
         workUpgradeText.text = "Learn: $" + workUpgradeCost.ToString("F0") + " \nROI: +$" + workUpgradeLevel + " per click";
         bizUpgradeText.text = "Learn: $" + bizUpgradeCost.ToString("F0") + "\nROI: +" + bizUpgradeROI + " Business Level";
 
-        bizLevel1Text.text = "Requirements: $" + bizLevel1Cost.ToString("F0") + " & Business Level >= " + bizLevel1Level + "\nROI: $" + bizLevel1ROI + " cash/sec";
+        bizLevel1Text.text = "Cash: $" + bizLevel1Cost.ToString("F0") + "\nBusiness Level: " + bizLevel1Level + "\nROI: $" + bizLevel1ROI + " cash/sec";
         //biz1Text.text = "Lemonade Stand $" + biz1Cost.ToString("F0") + " \nROI: +$" + biz1UpgradeLevel + " cash /sec";
 
         
@@ -84,7 +84,7 @@ public class IdleTut : MonoBehaviour
             cashClickValue += workUpgradeLevel;
 
             //workUpgradeLevel++;
-            workUpgradeCost *= 1.5;
+            workUpgradeCost += 25;
         }
     }
 
@@ -96,7 +96,7 @@ public class IdleTut : MonoBehaviour
             bizLevel += bizUpgradeROI;
 
             //workUpgradeLevel++;
-            bizUpgradeCost *= 1.5;
+            bizUpgradeCost += 25;
         }
     }
 
@@ -108,8 +108,9 @@ public class IdleTut : MonoBehaviour
             cashPerSec += bizLevel1ROI;
 
             //bizLevel1ROI++;
+            bizLevel1ROI++;
             bizLevel1Level++;
-            bizLevel1Cost *= 1.5;
+            bizLevel1Cost += 25;
         }
     }
 
