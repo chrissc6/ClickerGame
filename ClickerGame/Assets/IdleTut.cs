@@ -13,33 +13,60 @@ public class IdleTut : MonoBehaviour
     public Text cashPerSecText;
     public double cashPerSec;
 
+    public Text bizLevelText;
+    public double bizLevel;
+
     public Text workUpgradeText;
     public double workUpgradeCost;
     public double workUpgradeLevel;
 
-    public Text biz1Text;
-    public double biz1Cost;
-    public double biz1UpgradeLevel;
+    public Text bizUpgradeText;
+    public double bizUpgradeCost;
+    public double bizUpgradeROI;
+
+    public Text bizLevel1Text;
+    public double bizLevel1Cost;
+    public double bizLevel1Level;
+    public double bizLevel1ROI;
+
+    //public Text biz1Text;
+    //public double biz1Cost;
+    //public double biz1UpgradeLevel;
 
     public void Start()
     {
         cashClickValue = 1;
+
         workUpgradeCost = 10;
-        biz1Cost = 25;
-        biz1UpgradeLevel = 1;
         workUpgradeLevel = 1;
+
+        bizUpgradeCost = 20;
+        bizUpgradeROI = 1;
+
+        //biz1Cost = 25;
+        //biz1UpgradeLevel = 1;
+
+        bizLevel1Cost = 25;
+        bizLevel1Level = 1;
+        bizLevel1ROI = 1;
+
     }
 
     public void Update()
     {
-        //cashPerSec = biz1UpgradeLevel;
-
         cashText.text = "Cash: $" + cash.ToString("F0");
 
         cashClickValueText.text = "Cash Per Click: $" + cashClickValue.ToString("F0");
         cashPerSecText.text = "Cash Per Sec: $" + cashPerSec.ToString("F0");
-        workUpgradeText.text = "Upgrade: $" + workUpgradeCost.ToString("F0") + " \nROI: +$" + workUpgradeLevel + "per click";
-        biz1Text.text = "Lemonade Stand $" + biz1Cost.ToString("F0") + " \nROI: +$" + biz1UpgradeLevel + " cash /sec";
+        bizLevelText.text = "Business Level: " + bizLevel.ToString("F0");
+
+        workUpgradeText.text = "Learn: $" + workUpgradeCost.ToString("F0") + " \nROI: +$" + workUpgradeLevel + " per click";
+        bizUpgradeText.text = "Learn: $" + bizUpgradeCost.ToString("F0") + "\nROI: +" + bizUpgradeROI + " Business Level";
+
+        bizLevel1Text.text = "Requirements: $" + bizLevel1Cost.ToString("F0") + " & Business Level >= " + bizLevel1Level + "\nROI: $" + bizLevel1ROI + " cash/sec";
+        //biz1Text.text = "Lemonade Stand $" + biz1Cost.ToString("F0") + " \nROI: +$" + biz1UpgradeLevel + " cash /sec";
+
+        
 
         cash += cashPerSec * Time.deltaTime;
     }
@@ -56,20 +83,33 @@ public class IdleTut : MonoBehaviour
             cash -= workUpgradeCost;
             cashClickValue += workUpgradeLevel;
 
-            workUpgradeLevel++;
-            workUpgradeCost *= 2;
+            //workUpgradeLevel++;
+            workUpgradeCost *= 1.5;
+        }
+    }
+
+    public void BizUpgrade()
+    {
+        if (cash >= bizUpgradeCost)
+        {
+            cash -= bizUpgradeCost;
+            bizLevel += bizUpgradeROI;
+
+            //workUpgradeLevel++;
+            bizUpgradeCost *= 1.5;
         }
     }
 
     public void Biz1()
     {
-        if (cash >= biz1Cost)
+        if (cash >= bizLevel1Cost && bizLevel >= bizLevel1Level)
         {
-            cash -= biz1Cost;
-            cashPerSec += biz1UpgradeLevel;
+            cash -= bizLevel1Cost;
+            cashPerSec += bizLevel1ROI;
 
-            biz1UpgradeLevel++;
-            biz1Cost += 5;
+            //bizLevel1ROI++;
+            bizLevel1Level++;
+            bizLevel1Cost *= 1.5;
         }
     }
 
