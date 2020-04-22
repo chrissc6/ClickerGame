@@ -28,10 +28,9 @@ public class IdleTut : MonoBehaviour
     public double bizLevel1Cost;
     public double bizLevel1Level;
     public double bizLevel1ROI;
-
-    //public Text biz1Text;
-    //public double biz1Cost;
-    //public double biz1UpgradeLevel;
+    public Text bizLevel1TotalText;
+    public double bizLevel1TotalO;
+    public double bizLevel1TotalC;
 
     public void Start()
     {
@@ -40,11 +39,8 @@ public class IdleTut : MonoBehaviour
         workUpgradeCost = 10;
         workUpgradeLevel = 1;
 
-        bizUpgradeCost = 20;
+        bizUpgradeCost = 100;
         bizUpgradeROI = 1;
-
-        //biz1Cost = 25;
-        //biz1UpgradeLevel = 1;
 
         bizLevel1Cost = 25;
         bizLevel1Level = 1;
@@ -60,14 +56,11 @@ public class IdleTut : MonoBehaviour
         cashPerSecText.text = "Cash Per Sec: $" + cashPerSec.ToString("F0");
         bizLevelText.text = "Business Level: " + bizLevel.ToString("F0");
 
-        workUpgradeText.text = "Learn: $" + workUpgradeCost.ToString("F0") + " \nROI: +$" + workUpgradeLevel + " per click";
-        bizUpgradeText.text = "Learn: $" + bizUpgradeCost.ToString("F0") + "\nROI: +" + bizUpgradeROI + " Business Level";
+        workUpgradeText.text = "$" + workUpgradeCost.ToString("F0") + " \nROI: +$" + workUpgradeLevel + " per click";
+        bizUpgradeText.text = "$" + bizUpgradeCost.ToString("F0") + "\nROI: +" + bizUpgradeROI + " Business Level";
 
-        bizLevel1Text.text = "Cash: $" + bizLevel1Cost.ToString("F0") + "\nBusiness Level: " + bizLevel1Level + "\nROI: $" + bizLevel1ROI + " cash/sec";
-        //biz1Text.text = "Lemonade Stand $" + biz1Cost.ToString("F0") + " \nROI: +$" + biz1UpgradeLevel + " cash /sec";
-
-        
-
+        bizLevel1Text.text = "Cash: $" + bizLevel1Cost.ToString("F0") + "\nBusiness Level: " + bizLevel1Level + "\nROI: +$" + bizLevel1ROI + " cash/sec";
+        bizLevel1TotalText.text = "Owned: " + bizLevel1TotalO.ToString("F0") + "\nCash/sec: $" + bizLevel1TotalC.ToString("F0");
         cash += cashPerSec * Time.deltaTime;
     }
 
@@ -83,8 +76,7 @@ public class IdleTut : MonoBehaviour
             cash -= workUpgradeCost;
             cashClickValue += workUpgradeLevel;
 
-            //workUpgradeLevel++;
-            workUpgradeCost += 25;
+            workUpgradeCost += 10;
         }
     }
 
@@ -95,19 +87,48 @@ public class IdleTut : MonoBehaviour
             cash -= bizUpgradeCost;
             bizLevel += bizUpgradeROI;
 
-            //workUpgradeLevel++;
-            bizUpgradeCost += 25;
+            bizUpgradeCost += 50;
         }
     }
 
     public void Biz1()
     {
-        if (cash >= bizLevel1Cost && bizLevel >= bizLevel1Level)
+        if (bizLevel >= 100 && bizLevel1Level == 10)
+        {
+            if (cash >= bizLevel1Cost && bizLevel >= bizLevel1Level)
+            {
+                cash -= bizLevel1Cost;
+                cashPerSec += bizLevel1ROI;
+
+                bizLevel1TotalO++;
+                bizLevel1TotalC += bizLevel1ROI;
+
+                bizLevel1ROI += 10;
+                bizLevel1Cost *= 2;
+            }
+        }
+        else if (bizLevel >= 10 && bizLevel1Level >= 10)
+        {
+            if (cash >= bizLevel1Cost && bizLevel >= bizLevel1Level)
+            {
+                cash -= bizLevel1Cost;
+                cashPerSec += bizLevel1ROI;
+
+                bizLevel1TotalO++;
+                bizLevel1TotalC += bizLevel1ROI;
+
+                bizLevel1ROI = 10;
+                bizLevel1Cost += 100;
+            }
+        }
+        else if (cash >= bizLevel1Cost && bizLevel >= bizLevel1Level)
         {
             cash -= bizLevel1Cost;
             cashPerSec += bizLevel1ROI;
 
-            //bizLevel1ROI++;
+            bizLevel1TotalO++;
+            bizLevel1TotalC += bizLevel1ROI;
+
             bizLevel1ROI++;
             bizLevel1Level++;
             bizLevel1Cost += 25;
@@ -115,17 +136,17 @@ public class IdleTut : MonoBehaviour
     }
 
 
-
-
-
-
-	//// Use this for initialization
-	//void Start () {
-		
-	//}
-	
-	//// Update is called once per frame
-	//void Update () {
-		
-	//}
+    //public string NumCheck(double x)
+    //{
+    //    string y;
+    //    switch (x)
+    //    {
+    //        case x > 1000000:
+    //            y = "million";
+    //            break;
+    //        default:
+    //    }
+    //    y = "bunch";
+    //    return y;
+    //}
 }
